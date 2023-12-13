@@ -1,0 +1,5 @@
+.Profile {
+    background-color:aliceblue!important;
+    display: flex;
+    flex-direction: column;
+}
