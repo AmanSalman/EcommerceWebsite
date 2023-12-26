@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useQuery } from 'react-query';
+import './order.css'
 
 export default function Order() {
     
@@ -17,16 +18,16 @@ export default function Order() {
     }
   return (
     <div className=' container mt-3'>
-        <h1>Orders Details:</h1>
+      <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Orders Details:</h1>
         <div>
             {
                data?.map((order,index)=>
 
-                 <div key={index} className='border p-3'>
+                 <div key={index} className='border border-color p-3 order'>
                     <h2>Phone: {order.phoneNumber}</h2>
                     <h3>Address : {order.address}</h3>
                     <h4>final Price: {order.finalPrice} $</h4>
-                    <span className=' fw-bold text-danger'>Status: {order.status}</span>
+                    <span className=' fw-bold status text-danger'>Status: {order.status}</span>
                  </div>
                ) 
             }

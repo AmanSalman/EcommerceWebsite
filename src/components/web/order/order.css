@@ -1,0 +1,13 @@
+
+
+.order h2, .order h3, .order h4  {
+    color: #b94b6e;
+}
+
+.order .status {
+    color: #7a4b5a !important;
+}
+
+.border-color {
+    border-color: #7a4b5a !important;
+}
