@@ -34,6 +34,10 @@ import ForgetPassword from "./components/web/login/ForgetPassword.jsx";
 import ClearCart from "./components/web/cart/ClearCart.jsx";
 import CreateOrder from "./components/web/cart/CreateOrder.jsx";
 import Order from "./components/web/order/Order.jsx";
+import Products from "./components/web/products/Products.jsx";
+import CreateReview from "./components/web/products/CreateReview.jsx";
+import UserInfo from "./components/web/profile/UserInfo.jsx";
+import UserContact from "./components/web/profile/UserContact.jsx";
 export default function App() {
 
 
@@ -78,16 +82,37 @@ export default function App() {
             element:<Categories />
           },
           {
+            path:'products',
+            element:<Products/>
+          },
+          {
             path:'profile',
-            element:<Profile/>
+
+            element:<ProtectedRoute>
+              <Profile/>
+            </ProtectedRoute>,
+            children:[
+              {
+                path:'info',
+                element:<UserInfo/>
+              },
+              {
+                path:'userContact',
+                element:<UserContact/>
+              }
+            ]
+          },
+          {
+            path:'Review/:productId',
+            element:<CreateReview/>
           },
 
           {
-            path:'/categories/products/:categoryId',
+            path:'/categories/products/:categoryName/:categoryId',
             element:<CategoriesProducts/>
           },
           {
-            path:'/product/:categoryId',
+            path:'/product/:ProductId',
             element:<ProductDetails/>
           },
           {

@@ -30,3 +30,8 @@ export const OrderSchema = yup.object ({
     phone: yup.string().required('phone is required').length(10,"10 char"),
     
 })
+
+export const ReviewSchema = yup.object ({
+    rating:yup.number().required().min(0,"min is 1").max(5,"max is 5"),
+    comment: yup.string(),
+})

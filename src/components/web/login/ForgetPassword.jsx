@@ -4,11 +4,13 @@ import Input from '../../pages/Input';
 import { registerSchema, restSchema } from '../validation/validate.js';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function ForgetPassword() {
 
 
+    const navigate = useNavigate();
     const initialValues= {
         email:'',
         password:'',
@@ -28,6 +30,7 @@ export default function ForgetPassword() {
                 progress: undefined,
                 theme: "light",
                 });
+                navigate('/home')
          }
 
     }
@@ -91,10 +94,10 @@ export default function ForgetPassword() {
   return (
     
     <div className=' container'>
-        <h1>change password</h1>
-        <form onSubmit={formik.handleSubmit} encType='multipart/form-data'>
+      <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>change password</h1>
+        <form onSubmit={formik.handleSubmit} encType='multipart/form-data' className=' d-flex justify-content-center align-items-center flex-column'>
         {renderInputs}
-        <button type='submit' disabled={!formik.isValid}>change</button>
+        <button type='submit' className='rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5' disabled={!formik.isValid}>change</button>
         </form>
     </div>
 

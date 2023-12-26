@@ -32,7 +32,7 @@ export default function Register() {
         //     console.log(data)
         //  }
 
-         const {data} = await axios.post(`${import.meta.env.VITE_API_URL}auth/signup`,formData);
+         const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`,formData);
          if (data.message == 'success'){
             toast.success('Account created successfully, please verify your email to login', {
                 position: "top-right",
@@ -114,10 +114,10 @@ export default function Register() {
   return (
     
     <div className=' container'>
-        <h1>create account</h1>
-        <form onSubmit={formik.handleSubmit} encType='multipart/form-data'>
+         <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Create Account:</h1>
+        <form onSubmit={formik.handleSubmit} encType='multipart/form-data' className=' d-flex  flex-column align-items-center justify-content-center'>
         {renderInputs}
-        <button type='submit' disabled={!formik.isValid}>Register</button>
+        <button type='submit' className='rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5' disabled={!formik.isValid}>Register</button>
         </form>
     </div>
 

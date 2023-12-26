@@ -2,25 +2,33 @@ import React from 'react'
 import { useContext } from 'react'
 import { UserContext } from '../context/User'
 import './Profile.css'
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 export default function Profile() {
-    const {userData} = useContext(UserContext);
+    const {userData,isLoading} = useContext(UserContext);
     
+    if(isLoading){
+      return <h2>Loading ...</h2>
+    }
     
   return (
-    <aside className='Profile d-flex flex-column align-items-center text-center p-3'>
+    <aside className='Profile d-flex'>
+
+      <div className='Profile-Links'>
+        <nav className='p-5 flex-column d-flex gap-2'>
+          <Link to='info' className=' text-decoration-none colorprofile'>Information</Link>
+          <Link to='userContact' className=' text-decoration-none colorprofile'>Contact</Link>
+        </nav>
+      </div>
+
       <div className='user-info' >
-        <h2>{userData?.userName}</h2>
-        <img src={userData?.image.secure_url}/>
+        <Outlet/>
       </div>
 
       <div className='user-contact'>
-        <h2 className='text'>{userData?.email}</h2>
+               
       </div>
 
-      <div className='order_info'>
-        <Link to='/orderDetails' className='border p-2 text-decoration-none'>MY Orders</Link>
-      </div>
+     
     </aside>
     // <div className='container d-flex flex-column align-items-center mt-4' key={userData._id}>
     // {

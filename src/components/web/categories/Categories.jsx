@@ -17,25 +17,26 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-import './Categories'
+import './Categories.css'
 
 export default function Categories() {
 
 	const getCategories = async () => {
 		const {data} = await axios.get(`${
 			import.meta.env.VITE_API_URL
-		}/categories`);
+		}/categories?limit=10`);
+		console.log(data)
 		return data;
 	}
 	const {data, isLoading} = useQuery('web_categories', getCategories);
 	if (isLoading) {
-		return <p>Loading ...
-		</p>
+		return <h2>Loading ...
+		</h2>
 	}
 	return (
 
 		<div className='container mt-5'>
-
+			<h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Our Categories:</h1>
 
 			<Swiper // install Swiper modules
 				modules={
@@ -66,10 +67,10 @@ export default function Categories() {
 				data ?. categories.map((Category) => <SwiperSlide key={
 					Category._id
 				}>
-					<img src={
+					
+					<Link  to={`/categories/products/${Category.name}/${Category._id}`}><img src={
 						Category.image.secure_url
-					}/>
-					<Link className=' text-decoration-none text-success d-flex justify-content-center fw-bold pb-5' to={`/categories/products/${Category._id}`}>{Category.name}</Link>
+					}  /></Link>
 					</SwiperSlide>)
 			} </Swiper>
 

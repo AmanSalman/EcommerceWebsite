@@ -1,0 +1,74 @@
+body {
+  font-family: 'Times New Roman', Times, serif !important;
+    /* background-color: #f2dbdb !important ; */
+    background-color: rgb(248, 196, 204) !important ;
+    margin: 0;
+  }
+
+  .container {
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .card {
+    flex: 0 0 calc(33.3333% - 20px); /* Adjust the width and margin as needed */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+    margin-bottom: 20px;
+    background-color: #ffffff!important;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #eee;
+  }
+
+  .card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+
+  .card-description {
+    color: #555;
+    margin-bottom: auto; /* Adjusted this line */
+  }
+
+  .price {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+.bordercolor {
+    border-bottom: solid 2px #c36b85 ;
+    width: fit-content;
+}
+
+
+.btn-custom{
+    background-color: #f0add2 !important;
+    color: #88626e !important;
+}
+
+.body-color{
+    background-color: #f3efef;
+    color: #88626e;
+}
+
+.ourProducts{
+    color: #88626e;
+}

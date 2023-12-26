@@ -1,0 +1,57 @@
+<>
+
+			<div className=' container mt-5'>
+				<div className='row'>
+					{
+					products ?. map((product) =>
+					 <div2 className='col-lg-4 d-flex align-items-center flex-column border p-1'
+						key={
+							product._id
+					}>
+						<img src={
+								product.mainImage.secure_url
+							}
+							className='img-fluid w-50 mb-2 mt-3 product-img'/>
+							<div className=' d-flex flex-column'>
+								<h2 className='text-decoration-none text-success d-flex justify-content-center fw-bold mb-3 p-2 border me-1 ms-1 '>
+							{
+							product.name
+						}</h2>
+						<h3>{
+							product.price
+						}</h3>
+
+
+							</div>
+						
+						<Link to={
+								`/Review/${
+									product._id
+								}`
+							}
+							className='text-decoration-none text-danger fw-bold'>Create Review</Link>
+
+<Link className=' text-decoration-none text-success d-flex justify-content-center fw-bold mb-3 p-2 border ' to={`/product/${product._id}`}>More Details</Link>
+					</div2>
+					)
+				} </div>
+			</div>
+			<div className=' d-flex'>
+				<button onClick={
+						() => handlePagination(-1)
+					}
+					disabled={
+						currentPage === 1
+				}>
+					Previous Page
+				</button>
+				<button onClick={
+						() => handlePagination(1)
+					}
+					disabled={
+						currentPage === totalPages
+				}>
+					Next Page
+				</button>
+			</div>
+		</>

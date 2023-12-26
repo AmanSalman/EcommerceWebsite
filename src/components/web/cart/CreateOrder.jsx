@@ -79,12 +79,12 @@ export default function CreateOrder() {
 
 
   return (
-    <div className='container d-flex justify-content-center text-center'>
+    <div className='container d-flex  text-center'>
         <div className='w-75'>
-             <h1 className='bg-success text-white rounded-5 mt-5 mb-3'>Finish the Order</h1>
+        <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Finish the Order:</h1>
     <form onSubmit={formik.handleSubmit} className=' d-flex flex-column align-items-center gap-1' encType='multipart/form-data'>
     {renderInputs}
-    <button type='submit' className='w-25 rounded-3' disabled={!formik.isValid} >Send</button>
+    <button type='submit' className=' rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5' disabled={!formik.isValid} >Send</button>
        </form> 
        
        </div>

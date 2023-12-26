@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { CartContext } from '../context/CartFeatures';
 import { UserContext } from '../context/User';
-
+import logo from './NavPhotos/aman-shop-high-resolution-logo-transparent.png'
+import './navbar.css'
 export default function Navbar() {;
   let {user,setUser,userData,setUserData} = useContext(UserContext);
   const {cartCount} = useContext(CartContext);
@@ -14,9 +15,9 @@ export default function Navbar() {;
     navigate('/');
   }
 	return (
-		<nav className="navbar navbar-expand-lg bg-body-tertiary">
+		<nav className="navbar navbarColor navbar-expand-lg navbar-light py-0">
 			<div className="container">
-				<a className="navbar-brand" href="#">T-shop</a>
+				<a className="navbar-brand " href="#">Ashop</a>
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span className="navbar-toggler-icon"/>
 				</button>
@@ -34,7 +35,7 @@ export default function Navbar() {;
 
 
 						<li className="nav-item">
-							<a className="nav-link" href="#">Products</a>
+							<Link className="nav-link" to='/products'>Products</Link>
 						</li>
 
 						{
@@ -62,11 +63,11 @@ export default function Navbar() {;
 								</> :
 								 <>
 									<li>
-										<Link className="dropdown-item" to="/profile">Profile</Link>
+										<Link className="dropdown-item " to="/profile">Profile</Link>
 									</li>
 									<li><hr className="dropdown-divider"/></li>
 									<li>
-										<Link className="dropdown-item" onClick={logout}>logout</Link>
+										<Link className="dropdown-item " onClick={logout}>logout</Link>
 									</li>
 								</>
 							} </ul>

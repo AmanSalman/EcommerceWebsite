@@ -1,5 +1,13 @@
-.nav-item .count {
-    left: 40px;
-    bottom: 19px;
-    font-size: 12px;
+.navbarColor {
+    /* background: hsl(340, 13%, 39%) !important; */
+    background: #903d57 !important;
+    
 }
+.nav-link , .navbar-brand{
+    color: rgb(219, 178, 200) !important;
+    /* color: rgb(165, 14, 94) !important; */
+    font-weight: 800 !important;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px !important;
+}
+

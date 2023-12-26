@@ -84,10 +84,10 @@ export default function SendCode() {
   return (
     
     <div className=' container'>
-        <h1>Rest Password</h1>
-        <form onSubmit={formik.handleSubmit} encType='multipart/form-data'>
+        <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Rest Password:</h1>
+        <form onSubmit={formik.handleSubmit} encType='multipart/form-data' className=' d-flex flex-column justify-content-center align-items-center'>
         {renderInputs}
-        <button type='submit' disabled={!formik.isValid}>send me code</button>
+        <button type='submit' className='rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5' disabled={!formik.isValid}>send me code</button>
         </form>
     </div>
 

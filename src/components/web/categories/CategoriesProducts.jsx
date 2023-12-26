@@ -21,14 +21,17 @@ import './Categories'
 export default function CategoriesProducts() {
 
     const {categoryId} = useParams();
+	const {categoryName} = useParams();
+	console.log(categoryName)
 	const getProducts = async () => {
 		const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products/category/${categoryId}`);
+		console.log(data.products)
 		return data.products;
 	}
 	const {data, isLoading} = useQuery('categories_Products', getProducts);
 	if (isLoading) {
-		return <p>Loading ...
-		</p>
+		return <h2>Loading ...
+</h2>
 	}
 	// const [categories, setCategories] = useState([])
 	// const [isLoading, setIsLoading] = useState(true)
@@ -56,13 +59,41 @@ export default function CategoriesProducts() {
 	return (
 
 		<div className='container mt-5 border'>
-            <div className='row p-5'>
+			<h1 className=' bordercolor mb-4 pb-1 ourProducts'>{categoryName}:</h1>
+            <div className='row'>
                 {
-				data.length? data?.map((Product) => 
-                <div className='col-lg-4 d-flex align-items-center flex-column border' key={Product._id}>
-					<img className=' img-fluid w-50 mb-2 mt-3' src={Product.mainImage.secure_url}/>
-					<Link className=' text-decoration-none text-success d-flex justify-content-center fw-bold mb-3 p-2 border ' to={`/product/${Product._id}`}>{Product.name}</Link>
-					</div>):<h2>No data found</h2>
+				data.length? data?.map((product) => 
+
+				<div className="col-md-4 mb-3" key={product._id}>
+				   <div className="card h-100 w-100">
+					<div className=' d-flex justify-content-center'>
+						<img src={product.mainImage.secure_url} className='img-fluid w-50 mb-2 mt-3 product-img border-bottom'/>	
+					</div>
+				
+					 <div className="card-body  mb-2 p-2">
+						<div className='d-flex justify-content-between flex-row body-color rounded-2 p-2 mb-2'>
+
+					   <h3 className="card-title">{product.name}</h3>
+					  {/* <p className="card-description"></p> */}
+					   <p className="price d-inline-block body-color">${product.price}</p>
+						</div>
+						<div className='d-flex flex-column align-items-center'>
+					 <Link to={
+					`/Review/${
+						product._id
+					}`
+				}
+				className='text-decoration-none fw-bold btn border btn-custom w-50 mb-2'>Create Review</Link>
+
+<Link className=' text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  w-50' to={`/product/${product._id}`}>More Details</Link>
+					 </div>
+					
+					 </div>
+					
+			   </div>
+				</div>
+
+                ):<h2>No data found</h2>
 			} 
             </div>
 				

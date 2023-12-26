@@ -120,10 +120,9 @@ font-size:20px;
     gap:16px;
     border-radius: 6px;
     border: 1px solid #6C7275;
-    background-color: #fff;
+    background-color: rgb(208, 130, 156);
     width:630px;
     margin-top: 47px;
-
 
 }
 .summery-items {
@@ -167,6 +166,8 @@ font-size:20px;
     padding: 10px 26px;
     border-radius: 8px;
 }
+
+
 
 
 .cart .row:last-of-type{
@@ -298,4 +299,26 @@ footer .logo a {
     }
 
 
+}
+
+
+.CartEmpty {
+    color: palevioletred;
+}
+
+.btn-customCart{
+    background:rgb(252, 197, 215) !important;
+    color:hsl(340, 13%, 39%) !important;
+}
+
+.custom-pink {
+    background-color: rgb(238, 167, 193);
+    padding: 10px;
+    text-align: center;
+    border: rgb(125, 73, 90) dashed 2px;
+    font-size: 24px !important;
+}
+
+.custom-pink h2 {
+    color: rgb(75, 45, 55) !important;
 }

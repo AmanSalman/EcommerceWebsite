@@ -34,7 +34,7 @@ export default function Login() {
                 progress: undefined,
                 theme: "light",
                 });
-                navigate('/');
+                navigate('/home');
          }
 
     }
@@ -78,11 +78,11 @@ export default function Login() {
   return (
     
     <div className=' container '>
-        <h1>Login</h1>
+         <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Login:</h1>
         <form onSubmit={formik.handleSubmit} encType='multipart/form-data'>
         {renderInputs}
-        <button type='submit' className=' me-2' disabled={!formik.isValid}>Login</button>
-        <Link to='/sendcode'>Forget Password?</Link>
+        <button type='submit' className=' me-2  rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5' disabled={!formik.isValid}>Login</button>
+        <Link to='/sendcode' className=' rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5'>Forget Password?</Link>
         
         </form>
     </div> 

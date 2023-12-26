@@ -1,5 +1,36 @@
 .Profile {
     background-color:aliceblue!important;
     display: flex;
-    flex-direction: column;
+    gap: 30px;
+    overflow: hidden;
+    
+}
+.Profile-Links{
+    width: 300px;
+}
+
+.user-info{
+    flex-grow: 1;
+    overflow: hidden;
+}
+.Profile-Links nav {
+    background-color: palevioletred;
+    height: 100vh;
+}
+
+.userphoto{
+    width:13%;
+}
+
+.colorprofile  {
+    color: rgb(233, 230, 225) !important;
+    font-weight: 700;
+}
+
+.email {
+    color: rgb(180, 111, 111);
+}
+
+.width-btn{
+    width: fit-content;
 }
