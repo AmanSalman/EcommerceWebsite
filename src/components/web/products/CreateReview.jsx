@@ -82,10 +82,10 @@ export default function CreateReview() {
   return (
     
     <div className=' container'>
-        <h1>Adding Review</h1>
-        <form onSubmit={formik.handleSubmit} >
+        <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Adding Review:</h1>
+        <form onSubmit={formik.handleSubmit} className=' d-flex justify-content-center align-items-center flex-column' >
         {renderInputs}
-        <button type='submit' disabled={!formik.isValid}>Add</button>
+        <button type='submit' disabled={!formik.isValid} className='rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5'>Add</button>
         </form>
     </div>
 
