@@ -4,35 +4,27 @@ import Input from '../../pages/Input';
 import { registerSchema } from '../validation/validate.js';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-
+import './Style.css'
 
 export default function Register() {
 
 
     const initialValues= {
-        userName:'',
+        username:'',
         email:'',
         password:'',
-        image:'',
     };
 
-    const handelFieldChange = (event)=>{
-        formik.setFieldValue('image', event.target.files[0]);
-    }
-
     const onSubmit = async (users) => {
-        // console.log(users);
-        // we used formData cuz we have here image.
          const formData = new FormData();
-         formData.append("userName",users.userName);
+         formData.append("userName",users.username);
          formData.append("email",users.email);
          formData.append("password",users.password);
-         formData.append("image",users.image);
         //  for(let data of formData.entries()){
         //     console.log(data)
         //  }
 
-         const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signup`,formData);
+         const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`,formData);
          if (data.message == 'success'){
             toast.success('Account created successfully, please verify your email to login', {
                 position: "top-right",
@@ -70,31 +62,24 @@ export default function Register() {
         {
             id:'username',
             type:'text',
-            name:'userName',
-            title:'user name',
+            name:'username',
+            title:'username',
             value:formik.values.userName,
         },
         {
             id:'email',
             type:'email',
             name:'email',
-            title:'user email',
+            title:'email',
             value:formik.values.email,
         },
         {
             id:'password',
             type:'password',
             name:'password',
-            title:'user password',
+            title:'password',
             value:formik.values.password,
         },
-        {
-            id:'image',
-            type:'file',
-            name:'image',
-            title:'user image',
-            onchange:handelFieldChange
-        }
     ]
 
     
@@ -113,13 +98,16 @@ export default function Register() {
     
   return (
     
-    <div className=' container'>
-         <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Create Account:</h1>
-        <form onSubmit={formik.handleSubmit} encType='multipart/form-data' className=' d-flex  flex-column align-items-center justify-content-center'>
+    <div className='container register-contanier'>
+         <h1 className='bordercolor'>Registeration</h1>
+        <form onSubmit={formik.handleSubmit} encType='multipart/form-data' className='Form-Register'>
         {renderInputs}
-        <button type='submit' className='rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5' disabled={!formik.isValid}>Register</button>
+        <button type='submit' className="button-23 mb-3" role="button" disabled={!formik.isValid}>Register</button>
         </form>
     </div>
 
   )
 }
+
+
+

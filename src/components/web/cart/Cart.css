@@ -1,15 +1,19 @@
 .cart{
     padding:20px 0 60px 0;
+}
 
+.item h2 {
+    color: var(--color3);
+}
 
+.cart-title {
+    border-bottom: var(--color1) 1px solid;
+    padding-bottom: 1rem;
 }
 
 
 .cart-items{
     display: flex;
-    padding:40px 0;
-
-
 }
 .cart-header{
     display: flex;
@@ -119,8 +123,7 @@ font-size:20px;
     flex-direction: column;
     gap:16px;
     border-radius: 6px;
-    border: 1px solid #6C7275;
-    background-color: rgb(208, 130, 156);
+    border: 1px solid var(--color1);
     width:630px;
     margin-top: 47px;
 
@@ -138,7 +141,7 @@ font-size:20px;
 
 }
 .summary-item  {
-    border: 1px solid #6C7275;
+    border: 1px solid var(--color1);
     padding: 13px;
     border-radius: 6px;
 
@@ -157,7 +160,7 @@ font-size:20px;
 
 
  .checkout a{
-    background-color: #141718;
+    background-color: var(--color1);
     width:100%;
     display: flex;
     color:#fff;
@@ -178,7 +181,7 @@ font-size:20px;
 
 
 .cart p:last-of-type{
-    color:#6C7275;
+    color:var(--color1);
 }
 
 
@@ -223,7 +226,7 @@ font-size:20px;
 
 
 footer{
-    background-color: #141718;
+    background-color: var(--color1);
     color:#fff;
     padding: 80px 0 32px 0;
 
@@ -303,11 +306,11 @@ footer .logo a {
 
 
 .CartEmpty {
-    color: palevioletred;
+    color: var(--color1);
+    text-align: center;
 }
 
 .btn-customCart{
-    background:rgb(252, 197, 215) !important;
     color:hsl(340, 13%, 39%) !important;
 }
 
@@ -321,4 +324,34 @@ footer .logo a {
 
 .custom-pink h2 {
     color: rgb(75, 45, 55) !important;
+}
+
+
+
+
+
+
+
+/* .remove-button {
+    border: var(--color1) solid 1px !important;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color2)!important; 
+} */
+
+.buttonchangeQTY {
+    border: var(--color1) solid 1px !important;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--color2)!important; 
 }

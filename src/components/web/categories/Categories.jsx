@@ -18,25 +18,36 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import './Categories.css'
+import Loader from '../Loader/Loader';
 
 export default function Categories() {
 
 	const getCategories = async () => {
 		const {data} = await axios.get(`${
 			import.meta.env.VITE_API_URL
-		}/categories?limit=10`);
+		}/category/active`);
 		console.log(data)
 		return data;
 	}
 	const {data, isLoading} = useQuery('web_categories', getCategories);
 	if (isLoading) {
-		return <h2>Loading ...
-		</h2>
+		return <Loader/>
 	}
 	return (
 
 		<div className='container mt-5'>
-			<h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Our Categories:</h1>
+			<nav aria-label="breadcrumb">
+    <ol className="breadcrumb">
+      <li className="breadcrumb-item">
+        <Link to="/products" className="main-color text-decoration-none">
+          Categories 
+        </Link>
+      </li>
+      <li className="breadcrumb-item main-color">
+      </li>
+    </ol>
+  </nav>
+			<h1 className=' bordercolor ourProducts fw-bold'>Our Categories:</h1>
 
 			<Swiper // install Swiper modules
 				modules={
@@ -70,7 +81,7 @@ export default function Categories() {
 					
 					<Link  to={`/categories/products/${Category.name}/${Category._id}`}><img src={
 						Category.image.secure_url
-					}  /></Link>
+					} className=' img-fluid' style={{borderRadius:'50%'}} /></Link>
 					</SwiperSlide>)
 			} </Swiper>
 

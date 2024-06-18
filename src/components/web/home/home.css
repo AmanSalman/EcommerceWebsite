@@ -21,16 +21,6 @@
     }
 
 
-    /* @media screen and (min-width:768px){
-        .logostyling {
-            height: 47% !important;
-            width: 50%;
-        }
+    .m-home {
+        margin-top:2rem;
     }
-
-    @media screen and (min-width:1280px){
-        .logostyling {
-            height: 65% !important;
-            width: 35%;
-        }
-    } */

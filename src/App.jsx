@@ -22,7 +22,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import CategoriesProducts from "./components/web/categories/CategoriesProducts.jsx";
-import ProductDetails from "./components/web/categories/ProductDetails.jsx";
+import ProductDetails from "./components/web/products/ProductDetails.jsx";
 import { CartContext, CartContextProvider } from "./components/web/context/CartFeatures.jsx";
 import Cart from "./components/web/cart/Cart.jsx";
 import ProtectedRoute from "./components/web/protectedRoute/ProtectedRoute.jsx";

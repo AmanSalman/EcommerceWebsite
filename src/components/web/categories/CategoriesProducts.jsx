@@ -17,6 +17,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import './Categories'
+import Loader from '../Loader/Loader';
 
 export default function CategoriesProducts() {
 
@@ -30,8 +31,7 @@ export default function CategoriesProducts() {
 	}
 	const {data, isLoading} = useQuery('categories_Products', getProducts);
 	if (isLoading) {
-		return <h2>Loading ...
-</h2>
+		return <Loader/>
 	}
 	// const [categories, setCategories] = useState([])
 	// const [isLoading, setIsLoading] = useState(true)

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react'
 import { useQuery } from 'react-query';
 import './order.css'
+import Loader from '../Loader/Loader';
 
 export default function Order() {
     
@@ -14,7 +15,7 @@ export default function Order() {
 
     const {data,isLoading} = useQuery("order details",getOrders);
     if(isLoading){
-        return <h1>Loading ... </h1>
+        return <Loader/>
     }
   return (
     <div className=' container mt-3'>

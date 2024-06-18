@@ -10,22 +10,15 @@ export function CartContextProvider ({children}){
     
     const addToCart = async (ProductId)=>{
         try {
+
             const token = localStorage.getItem("userToken");
+            console.log(token)
             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/cart`,
-            {productId:ProductId,quantity:1},
-            {headers:{Authorization:`Tariq__${token}`}} 
+            {productId:ProductId},
+            {headers:{Authorization:`AmanGRAD__${token}`}} 
             )
             if (data.message == 'success'){
-                toast.success('added successfully', {
-                    position: "top-right",
-                    autoClose: false,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    });
+                toast.success('added successfully');
              }
              setCount(cartCount+1)
              return data;
@@ -44,7 +37,7 @@ export function CartContextProvider ({children}){
         try{
              const token = localStorage.getItem("userToken");
         const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
-        {headers:{Authorization:`Tariq__${token}`}})
+        {headers:{Authorization:`AmanGRAD__${token}`}})
         setCount(data.count)
         return data;
         } catch (error){
@@ -55,9 +48,13 @@ export function CartContextProvider ({children}){
     
     const removeItemContext = async (ProductId)=>{
         try{
-             const token = localStorage.getItem("userToken");
-        const {data} = await axios.patch(`${import.meta.env.VITE_API_URL}/cart/removeItem`,{productId:ProductId},
-        {headers:{Authorization:`Tariq__${token}`}} )
+
+            console.log(ProductId)
+            const token = localStorage.getItem("userToken");
+            console.log(token)
+        const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/cart/${ProductId}`,{},
+        {headers:{Authorization:`AmanGRAD__${token}`}} )
+        console.log(data)
         return data;
         } catch (error){
             console.log(error)

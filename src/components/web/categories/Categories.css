@@ -3,5 +3,29 @@
 }
 
 .swiper{
-    padding: 63px !important;
+    padding-inline: 63px !important;
 }
+
+.swiper-slide {
+    width: px !important;
+}
+.swiper-scrollbar-horizontal {
+    display: none !important;
+}
+
+.swiper-button-prev:after , .swiper-button-next:after {
+    font-size: 1.6rem;
+    color: black;
+  
+}
+
+.swiper-button-prev, .swiper-button-next {
+    padding: 1.5rem;
+    background: var(--color3);
+    border-radius: 50%;
+  
+}
+
+
+
+

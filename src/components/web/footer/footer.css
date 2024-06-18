@@ -1,4 +1,7 @@
-.footer {
-    color: #b94b6e;
-    font-size: 14px;
-}
+.footer__copy {
+    display: block;
+    font-size: .813rem;
+    text-align: center;
+    margin-top: 6rem;
+    font-weight: 600;
+  }

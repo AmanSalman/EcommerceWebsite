@@ -3,10 +3,11 @@ import { useFormik } from 'formik';
 import Input from '../../pages/Input';
 import { LoginSchema, registerSchema } from '../validation/validate.js';
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/User.jsx';
-
+import Loginimg from '../../../assets/NewUp/Login.jpg'
+import './Login.css'
 
 export default function Login() {
     const initialValues= {
@@ -19,21 +20,13 @@ export default function Login() {
     if(user){
         navigate(-1);
     }
-    const onSubmit = async (users) => {
-         const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/signin`,users);
+    const onSubmit = async (user) => {
+         const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,user);
+         console.log(data.message)
          if (data.message == 'success'){
             localStorage.setItem("userToken", data.token);
             setUser(data.token)
-            toast.success('Login successfully', {
-                position: "top-right",
-                autoClose: false,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
+            toast.success('Login successfully');
                 navigate('/home');
          }
 
@@ -49,14 +42,14 @@ export default function Login() {
             id:'email',
             type:'email',
             name:'email',
-            title:'user email',
+            title:'email',
             value:formik.values.email,
         },
         {
             id:'password',
             type:'password',
             name:'password',
-            title:'user password',
+            title:'password',
             value:formik.values.password,
         },
     ]
@@ -77,14 +70,24 @@ export default function Login() {
     
   return (
     
-    <div className=' container '>
-         <h1 className=' bordercolor mb-4 pb-1 ourProducts fw-bold'>Login:</h1>
-        <form onSubmit={formik.handleSubmit} encType='multipart/form-data'>
+    <div className='container register-contanier'>
+         <h1 className='bordercolor'>Login:</h1>
+        <form className='Form-Register' onSubmit={formik.handleSubmit} encType='multipart/form-data'>
         {renderInputs}
-        <button type='submit' className=' me-2  rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5' disabled={!formik.isValid}>Login</button>
-        <Link to='/sendcode' className=' rounded-3 text-decoration-none  fw-bold mb-3 p-2 border btn btn-custom  width-btn px-5'>Forget Password?</Link>
+        <button type='submit' className="button-23 mb-3" role="button" disabled={!formik.isValid}>Log in</button>
+        <Link to='/sendcode' className='forgetpass-link'>Forget Password?</Link>
         
         </form>
+         {/* <div className="contentWrapper">
+            <div className="LoginImgWrapper">
+                <img src={Loginimg} />
+            </div>
+            <div className="formWrapper">
+
+            </div>
+
+         </div> */}
+
     </div> 
 
   )

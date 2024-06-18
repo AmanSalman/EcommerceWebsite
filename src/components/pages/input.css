@@ -1,3 +1,9 @@
-.colorinput { 
-    background: #903d57 !important;
+.input-wrapper {
+  width: 50%;
 }
+
+.input-label{
+  color: var(--color3);
+  font-family:'Times New Roman', Times, serif;
+}
+

@@ -1,13 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600;700&display=swap");
+
 .navbarColor {
-    /* background: hsl(340, 13%, 39%) !important; */
-    background: #903d57 !important;
+     background: White; 
     
 }
-.nav-link , .navbar-brand{
-    color: rgb(219, 178, 200) !important;
-    /* color: rgb(165, 14, 94) !important; */
+.nav-link , .navbar-brand , .listdrop{
     font-weight: 800 !important;
     font-family: 'Times New Roman', Times, serif;
     font-size: 20px !important;
 }
 
+
+.navbar .nav-link {
+    padding-block: 5px;
+    position: relative;
+    color: black !important;
+    transition: ease-in-out all 0.5s;
+}
+
+.navbar .nav-link:hover {
+    color: var(--color1) !important;
+}
+
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: var(--color1);
+    transition: 0.5s;
+
+}
+
+.navbar .nav-link.active::after {
+    width: 100%;
+}
+
+.navbar .nav-link:hover::after {
+    width: 100%;
+}
+
+
+.navbar-nav {
+    gap:1.5rem;
+    align-items: baseline;
+}
+
+.dropdown-toggle::after  {
+    display: none !important;
+}
+
+@media (min-width: 992px) {
+    
+        .navbar-expand-lg .navbar-nav .nav-link {
+            padding-right:0;
+            padding-left: 0;
+        }
+
+    }
+
+
+
+ .nav__logo  {
+    /* color: #54d9e1 !important; */
+  font-size:2rem !important;
+  font-family:"Dancing Script", cursive;
+ }
+ 

@@ -1,0 +1,22 @@
+/* .contentWrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: green;
+}
+
+.formWrapper{
+    background-color: khaki;
+    margin: auto;
+    padding: 5rem;
+   
+}
+
+.LoginImgWrapper{
+    background-color: brown;
+} */
+
+
+.forgetpass-link {
+    color: var(--color1);
+    font-size: .8rem;
+}
