@@ -1,4 +1,4 @@
-.cart{
+/* .cart{
     padding:20px 0 60px 0;
 }
 
@@ -342,7 +342,7 @@ footer .logo a {
     align-items: center;
     cursor: pointer;
     color: var(--color2)!important; 
-} */
+} 
 
 .buttonchangeQTY {
     border: var(--color1) solid 1px !important;
@@ -354,4 +354,11 @@ footer .logo a {
     align-items: center;
     cursor: pointer;
     color: var(--color2)!important; 
+} */
+
+
+@media (min-width:320){
+    .frHoEQ {
+        flex-wrap: wrap !important;
+    }
 }

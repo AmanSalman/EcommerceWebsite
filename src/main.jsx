@@ -9,12 +9,14 @@ import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserContextProvider from './components/web/context/User.jsx'
 import {CartContextProvider} from './components/web/context/CartFeatures.jsx'
+import store from './components/Redux/store.js'
+import { Provider } from 'react-redux'
 
 
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')).render (
 
-
+<Provider store={store}>
 	<UserContextProvider>
 		<CartContextProvider>
 			<QueryClientProvider client={queryClient}>
@@ -24,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render (
 		</CartContextProvider>
 
 	</UserContextProvider>
+</Provider>
 
 
 )

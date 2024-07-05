@@ -11,7 +11,6 @@
 
 import { RouterProvider} from "react-router-dom";
 import Layout from "./layouts/Layout.jsx";
-import Register from "./components/web/register/Register.jsx";
 import Login from "./components/web/login/Login.jsx";
 import Home from "./components/web/home/Home.jsx";
 import Categories from "./components/web/categories/Categories.jsx";
@@ -38,6 +37,7 @@ import Products from "./components/web/products/Products.jsx";
 import CreateReview from "./components/web/products/CreateReview.jsx";
 import UserInfo from "./components/web/profile/UserInfo.jsx";
 import UserContact from "./components/web/profile/UserContact.jsx";
+import Register from "./components/web/register/Register.jsx";
 export default function App() {
 
 

@@ -1,68 +1,93 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import Loader from "../Loader/Loader";
 
 export const CartContext = createContext(null);
 
 export function CartContextProvider ({children}){
 
     let [cartCount,setCount] = useState(0);
+    let [Loading, setLoading] = useState(false)
     
     const addToCart = async (ProductId)=>{
         try {
-
             const token = localStorage.getItem("userToken");
-            console.log(token)
             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/cart`,
             {productId:ProductId},
             {headers:{Authorization:`AmanGRAD__${token}`}} 
             )
             if (data.message == 'success'){
                 toast.success('added successfully');
-             }
-             setCount(cartCount+1)
-             return data;
+                setCount(cartCount + 1);
+            }
+            return data;
            
-        } 
-        
-        
-        catch(error) {
-
+        } catch(error) {
             console.log(error)
         }
-        
     }
 
     const getCartContext = async ()=>{
-        try{
-             const token = localStorage.getItem("userToken");
-        const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
-        {headers:{Authorization:`AmanGRAD__${token}`}})
-        setCount(data.count)
-        return data;
+        try {
+            const token = localStorage.getItem("userToken");
+            const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
+            {headers:{Authorization:`AmanGRAD__${token}`}})
+            setCount(data.count);
+            return data;
         } catch (error){
             console.log(error)
         }
-        
     }
     
     const removeItemContext = async (ProductId)=>{
-        try{
-
-            console.log(ProductId)
+        try {
+            setLoading(true)
             const token = localStorage.getItem("userToken");
-            console.log(token)
-        const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/cart/${ProductId}`,{},
-        {headers:{Authorization:`AmanGRAD__${token}`}} )
-        console.log(data)
-        return data;
+            const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/cart/${ProductId}`, {},
+            {headers:{Authorization:`AmanGRAD__${token}`}} 
+            );
+            setLoading(false)
+            return data;
         } catch (error){
             console.log(error)
+        } finally{
+            setLoading(false)
         }
-        
     }
-   
-    return <CartContext.Provider value={{addToCart, getCartContext, removeItemContext,cartCount ,setCount}}>
-        {children}
-    </CartContext.Provider>;
+
+    const updateItemQuantityContext = async (productId, quantity, operator) => {
+        try {
+            setLoading(true)
+            const token = localStorage.getItem("userToken");
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_API_URL}/cart/UpdateQty/${productId}`,
+                { quantity, operator },
+                { headers: { Authorization: `AmanGRAD__${token}` } }
+            );
+            console.log(data);
+            setLoading(false)
+            return data;
+        } catch (error) {
+            console.error('Error updating quantity:', error);
+        }finally{
+            setLoading(false);
+        }
+    };
+
+    if(Loading){
+        return <Loader/>
+    }
+    return (
+        <CartContext.Provider value={{
+            addToCart,
+            getCartContext,
+            removeItemContext,
+            updateItemQuantityContext,
+            cartCount,
+            setCount
+        }}>
+            {children}
+        </CartContext.Provider>
+    );
 }
