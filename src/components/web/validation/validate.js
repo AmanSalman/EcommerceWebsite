@@ -25,8 +25,8 @@ export const restSchema = yup.object ({
 })
 
 export const OrderSchema = yup.object ({
-    couponName:yup.string().length(5,"5 char"),
-    address: yup.string().required('address is required').min(3,"3 char"),
+    couponId:yup.string().length(5,"5 char"),
+    Address: yup.string().required('address is required').min(3,"3 char"),
     phone: yup.string().required('phone is required').length(10,"10 char"),
     
 })

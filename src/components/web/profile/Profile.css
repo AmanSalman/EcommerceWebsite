@@ -1,4 +1,4 @@
-.Profile {
+/* .Profile {
     background-color:aliceblue!important;
     display: flex;
     gap: 30px;
@@ -14,7 +14,7 @@
     overflow: hidden;
 }
 .Profile-Links nav {
-    background-color: palevioletred;
+    background-color: var(--color3);
     height: 100vh;
 }
 
@@ -23,8 +23,9 @@
 }
 
 .colorprofile  {
-    color: rgb(233, 230, 225) !important;
+    color: var(--color2);
     font-weight: 700;
+    font-size:1.2rem;
 }
 
 .email {
@@ -33,4 +34,124 @@
 
 .width-btn{
     width: fit-content;
+} */
+
+
+/* Profile.css */
+
+
+.Profile {
+    background-color: var(--color2);
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.Profile-Links {
+    width: 300px;
+}
+
+.Profile-Links nav {
+    background-color: var(--color4);
+    height: 100vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.colorprofile {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.colorprofile:hover {
+    color: var(--color1);
+}
+
+.user-info {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-contact {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.userphoto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 16px;
+    margin-right: 10px;
+}
+
+.email {
+    color: rgb(180, 111, 111);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.width-btn {
+    width: fit-content;
+    background-color: var(--color2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.width-btn:hover {
+    background-color: var(--color3);
+}
+
+.btn-custom {
+    background-color: var(--color2);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+    background-color: var(--color3);
+}
+
+.border {
+    border: 2px solid var(--color3);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+.card-title {
+    color:var(--color3) !important;
+}
+
+
+/* .col-md-3 {
+    color: var(--color4) !important;
+    font-weight: 700;
+}
+
+.col-md-9 {
+    color: var(--color3) !important;
+    font-weight: 700;
+} */
+
+
+.orders {
+    font-family: "Dancing Script", cursive;
 }

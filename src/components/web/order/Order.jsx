@@ -9,7 +9,8 @@ export default function Order() {
     const getOrders = async ()=>{
         const token = localStorage.getItem("userToken");
         const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/order`,
-        {headers:{Authorization:`Tariq__${token}`}}) 
+        {headers:{Authorization:`AmanGRAD__${token}`}}) 
+        console.log(data.orders)
         return data.orders;
     }
 
@@ -25,7 +26,7 @@ export default function Order() {
                data?.map((order,index)=>
 
                  <div key={index} className='border border-color p-3 order'>
-                    <h2>Phone: {order.phoneNumber}</h2>
+                    <h2>Phone: {order.phone}</h2>
                     <h3>Address : {order.address}</h3>
                     <h4>final Price: {order.finalPrice} $</h4>
                     <span className=' fw-bold status text-danger'>Status: {order.status}</span>

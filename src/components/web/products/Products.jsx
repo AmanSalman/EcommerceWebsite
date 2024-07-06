@@ -260,10 +260,11 @@
 //   );
 // }
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import styled from 'styled-components';
+import { CartContext } from '../context/CartFeatures';
 
 // Styled components for card layout
 const CardContainer = styled.section`
@@ -403,6 +404,10 @@ export default function Products() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+
+  const { addToCart } = useContext(CartContext);
+
+
   // Function to fetch products from API
   const getProducts = async () => {
     try {
@@ -459,7 +464,7 @@ export default function Products() {
                 <Price>${product.price}</Price>
                 <CardBack className="card-back">
                   <Link to={`/product/${product._id}`}>View Details</Link>
-                  <Link to={`/addtocart`}>Add To Cart</Link>
+                  <Link  onClick={()=>addToCart(product._id)}>Add To Cart</Link>
                 </CardBack>
               </Cover>
             </Card>

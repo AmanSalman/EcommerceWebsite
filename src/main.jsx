@@ -11,6 +11,7 @@ import UserContextProvider from './components/web/context/User.jsx'
 import {CartContextProvider} from './components/web/context/CartFeatures.jsx'
 import store from './components/Redux/store.js'
 import { Provider } from 'react-redux'
+import { WishlistProvider } from './components/web/context/WishlistFeatures.jsx'
 
 
 const queryClient = new QueryClient();
@@ -19,10 +20,13 @@ ReactDOM.createRoot(document.getElementById('root')).render (
 <Provider store={store}>
 	<UserContextProvider>
 		<CartContextProvider>
+			<WishlistProvider>
 			<QueryClientProvider client={queryClient}>
 				<ToastContainer/>
 				<App/>
 			</QueryClientProvider>
+
+			</WishlistProvider>
 		</CartContextProvider>
 
 	</UserContextProvider>

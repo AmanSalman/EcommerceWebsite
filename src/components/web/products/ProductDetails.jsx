@@ -349,12 +349,15 @@ export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState("Red");
   const [selectedSize, setSelectedSize] = useState("M");
 
+
   const getDetails = async () => {
     const { data } = await axios.get(
       `${import.meta.env.VITE_API_URL}/product/${ProductId}`
     );
     const subImagesWithMain = [data.product.MainImage, ...data.product.subImage];
     setMainImage(data.product.MainImage.secure_url);
+
+    console.log({ ...data.product, subImage: subImagesWithMain })
     return { ...data.product, subImage: subImagesWithMain };
   };
 

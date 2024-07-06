@@ -18,7 +18,7 @@ import DashboardLayout from "../src/layouts/DashboardLayouts.jsx"
 import HomeDashboard from './components/dashboard/home/Home.jsx';
 import CategoriesDashboard from './components/dashboard/categories/Categories.jsx'
 import { createBrowserRouter } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Profiler, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import CategoriesProducts from "./components/web/categories/CategoriesProducts.jsx";
 import ProductDetails from "./components/web/products/ProductDetails.jsx";
@@ -38,6 +38,7 @@ import CreateReview from "./components/web/products/CreateReview.jsx";
 import UserInfo from "./components/web/profile/UserInfo.jsx";
 import UserContact from "./components/web/profile/UserContact.jsx";
 import Register from "./components/web/register/Register.jsx";
+import Wishlist from "./components/web/wishlist/Wishlist.jsx";
 export default function App() {
 
 
@@ -57,6 +58,10 @@ export default function App() {
       path:'/',
       element:<Layout />,
       children:[
+        {
+          path:'/',
+          element:<Home/>
+        },
           {
             path:'register',
             element:<Register />
@@ -72,10 +77,6 @@ export default function App() {
           {
             path:'forgetpassword',
             element:<ForgetPassword/>
-          },
-          {
-            path:'home',
-            element:<Home />
           },
           {
             path:'categories',
@@ -123,6 +124,14 @@ export default function App() {
             </ProtectedRoute>
            
           },
+          {
+            path:'wishlist',
+            element:
+            <ProtectedRoute>
+               <Wishlist/>
+            </ProtectedRoute>
+          },
+
           {
             path:'clearcart',
             element:<ClearCart/>

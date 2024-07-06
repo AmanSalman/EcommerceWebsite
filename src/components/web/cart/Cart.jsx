@@ -169,7 +169,7 @@
 //             const response = await axios.get(`${import.meta.env.VITE_API_URL}/product/${cartItem.productId}`);
 //             const productWithDetail = {
 //               ...cartItem,
-//               details: response.data.product, 
+//               details: response.data.product,
 //             };
 //             productsWithDetails.push(productWithDetail);
 //           } catch (error) {
@@ -247,16 +247,14 @@
 // };
 
 // export default Cart;
-import React, { useState, useEffect, useContext } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import axios from 'axios';
-import { useQuery } from 'react-query';
-import { CartContext } from '../context/CartFeatures.jsx';
-import { useNavigate } from 'react-router-dom';
-import Loader from '../Loader/Loader.jsx';
-import { BsBoxes, BsCart4 } from 'react-icons/bs';
-import { FaBoxOpen } from 'react-icons/fa';
-import { BiSolidCoupon } from 'react-icons/bi';
+import React, { useState, useEffect, useContext } from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import axios from "axios";
+import { useQuery } from "react-query";
+import { CartContext } from "../context/CartFeatures.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader.jsx";
+import { BsBoxes, BsCart4 } from "react-icons/bs";
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
@@ -274,13 +272,14 @@ const CartContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
-  gap: 1.5rem;
-  p{
-  margin: 0;}
-
-  @media (max-width:640px){
   flex-direction: column;
-  
+  gap: 1.5rem;
+  p {
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
   }
 `;
 
@@ -291,19 +290,15 @@ const ProductsSection = styled.div`
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  @media (max-width:640px){
-  margin: auto;
-  width:100%;
+  @media (max-width: 640px) {
+    margin: auto;
+    width: 100%;
   }
 `;
 
 const SummarySection = styled.div`
-  flex: 1;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  width: 50%;
+  display: flex;
+  flex-direction: column;
   margin: auto;
 `;
 
@@ -312,31 +307,24 @@ const Title = styled.h2`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  color:var(--color3);
-  `;
-  
-  const CouponTitle = styled.h3`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color:var(--color3);
-  `;
+  color: var(--color3);
+`;
 
-  
 const ItemCount = styled.span`
   font-size: 1em;
   font-weight: bold;
-  @media (max-width:400px){
-  
-  font-size: 0.8em;}
+  @media (max-width: 400px) {
+    font-size: 0.8em;
+  }
 `;
 
 const CouponInput = styled.input`
   width: 100%;
   padding: 10px;
   margin-top: 10px;
+  margin-bottom: 10px;
   border: 2px solid var(--color3);
-  border-radius: 25px;
+  border-radius: 10px;
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-size: 1em;
@@ -344,7 +332,7 @@ const CouponInput = styled.input`
 
   &:focus {
     outline: none;
-    border-color: var(--color1);
+    border-color: var(--color2);
   }
 `;
 
@@ -422,27 +410,47 @@ const ProductItem = styled.div`
     .details {
       margin-top: 10px;
       display: flex;
-      flex-direction: column; 
+      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
 
     img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    margin-right: 10px;
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
   }
+`;
 
-  }
+const TotalPriceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const TotalPrice = styled.p`
   font-size: 1.4em;
   color: var(--color3);
-  margin-top: 20px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const ClearCartButton = styled (Link)`
+  background-color:var(--color4);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-decoration: none;
+  &:hover {
+    background-color:var(--color3);
+  }
 `;
 
 const Quantity = styled.p`
@@ -450,34 +458,60 @@ const Quantity = styled.p`
 `;
 
 const DiscountPrice = styled.p`
-  font-size: 1em;
-  font-weight: bold;
+  font-size: 0.9em;
   text-decoration: line-through;
-  color: #ff4d4d;
-  `;
-  
-  const FinalPrice = styled.p`
-  color: #28a745;
+  color: #dddada;
+`;
+
+const FinalPrice = styled.p`
+  color: red;
   font-size: 1em;
   font-weight: bold;
   margin-top: 10px;
 `;
 
+const MakeOrderButton = styled(Link)`
+  background-color: var(--color4);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease-in-out;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  &:hover {
+    background-color: var(--color3);
+  }
+`;
+
+const NoProductsMessage = styled.p`
+  text-align: center;
+  font-size: 1.2em;
+  color: #888;
+  margin-top: 20px;
+`;
+
 const Cart = () => {
   const navigate = useNavigate();
-  const { getCartContext, removeItemContext, updateItemQuantityContext } = useContext(CartContext);
+  const { getCartContext, removeItemContext, updateItemQuantityContext, clearCartContext } = useContext(CartContext);
   const [countCart, setCountCart] = useState(0);
   const [productsData, setProductsData] = useState([]);
   const [cart, setCart] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
+  const [loading, setIsLoading] = useState(false);
 
   const getCart = async () => {
+    setIsLoading(true);
     const res = await getCartContext();
-    setCart(res.cart)
+    setCart(res.cart);
     setCountCart(res.cart.products.length);
+    setIsLoading(false);
     return res;
   };
-
 
   const { data, isLoading } = useQuery("Cart", getCart);
 
@@ -489,15 +523,17 @@ const Cart = () => {
 
         for (const cartItem of data.cart.products) {
           try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/product/${cartItem.productId}`);
+            const response = await axios.get(
+              `${import.meta.env.VITE_API_URL}/product/${cartItem.productId}`
+            );
             const productWithDetail = {
               ...cartItem,
               details: response.data.product,
             };
             productsWithDetails.push(productWithDetail);
-            calculatedTotalPrice += response.data.product.price * cartItem.quantity;
+            calculatedTotalPrice += response.data.product.FinalPrice * cartItem.quantity;
           } catch (error) {
-            console.error('Error fetching product details:', error);
+            console.error("Error fetching product details:", error);
           }
         }
 
@@ -507,14 +543,15 @@ const Cart = () => {
     };
 
     fetchProductDetails();
-    console.log(cart)
   }, [data]);
 
   const handleUpdateQuantity = async (productId, quantityChange, operator) => {
-    const productToUpdate = productsData.find(product => product.productId === productId);
+    const productToUpdate = productsData.find(
+      (product) => product.productId === productId
+    );
 
     let updatedQuantity;
-    if (operator === '-') {
+    if (operator === "-") {
       updatedQuantity = productToUpdate.quantity - quantityChange;
       if (updatedQuantity < 1) {
         updatedQuantity = 1; // Ensuring quantity doesn't go below 1
@@ -536,56 +573,79 @@ const Cart = () => {
         {/* Left side: Products */}
         <ProductsSection>
           <Title>
-            <div> 
-            Cart | <BsCart4 /> :
-              </div>
-         
-             <ItemCount>{countCart} <BsBoxes /></ItemCount>
+            <div>
+              Cart | <BsCart4 color="black" /> :
+            </div>
+
+            <ItemCount>
+              {countCart} <BsBoxes color="black" />
+            </ItemCount>
           </Title>
-          {isLoading ? (
-            <p>Loading...</p>
+          {productsData.length === 0 ? (
+            <NoProductsMessage>No products in your cart.</NoProductsMessage>
           ) : (
-            productsData.map(product => (
+            productsData.map((product) => (
               <ProductItem key={product.productId}>
-                <img src={product.details.MainImage.secure_url} alt={product.details.name} />
+                <img
+                  src={product.details.MainImage.secure_url}
+                  alt={product.details.name}
+                />
                 <div className="details">
                   <h4>{product.details.name}</h4>
-                  {
-                    product.details.discount === 0 && (
-                      <p>Price: ${product.details.price}</p>
-                    )
-                  }
-                  {/* <Quantity>Quantity: {product.quantity}</Quantity> */}
-                  {product.details.discount != 0 && (
-                    <>
-                      <DiscountPrice>$
-                        <del>
-                         {product.details.price}
-                        </del>
-                        </DiscountPrice>
-                      <FinalPrice>Discounted Price: ${product.details.FinalPrice}</FinalPrice>
-                    </>
+                  {product.details.discount === 0 && (
+                    <p>Price: ${product.details.price}</p>
+                  )}
+                  {product.details.discount !== 0 && (
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: ".5rem",
+                        alignItems: "baseline",
+                      }}
+                    >
+                      <DiscountPrice>
+                        $<del>{product.details.price}</del>
+                      </DiscountPrice>
+                      <FinalPrice> ${product.details.FinalPrice}</FinalPrice>
+                    </div>
                   )}
                 </div>
                 <div className="actions">
-                  <button onClick={() => removeItemContext(product.productId)}>Remove</button>
+                  <button onClick={() => removeItemContext(product.productId)}>
+                    Remove
+                  </button>
                   <div className="quantity-controls">
-                    <button onClick={() => handleUpdateQuantity(product.productId, 1, '-')}>-</button>
+                    <button
+                      onClick={() =>
+                        handleUpdateQuantity(product.productId, 1, "-")
+                      }
+                    >
+                      -
+                    </button>
                     <span>{product.quantity}</span>
-                    <button onClick={() => handleUpdateQuantity(product.productId, 1, '+')}>+</button>
+                    <button
+                      onClick={() =>
+                        handleUpdateQuantity(product.productId, 1, "+")
+                      }
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               </ProductItem>
             ))
           )}
-          <TotalPrice>Total Price: ${totalPrice}</TotalPrice>
-
+          {productsData.length !== 0 && (
+            <TotalPriceContainer>
+              <TotalPrice>Total Price: ${totalPrice}</TotalPrice>
+              <ClearCartButton to={'/clearcart'}>Clear Cart</ClearCartButton>
+            </TotalPriceContainer>
+          )}
         </ProductsSection>
 
         {/* Right side: Summary and Coupon */}
         <SummarySection>
-          <CouponTitle>Coupon Code <BiSolidCoupon />  </CouponTitle>
-          <CouponInput type="text" placeholder="Enter coupon code" />
+          <MakeOrderButton to="/CreateOrder">Make Order</MakeOrderButton>
         </SummarySection>
       </CartContainer>
     </>

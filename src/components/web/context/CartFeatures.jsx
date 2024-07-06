@@ -19,7 +19,7 @@ export function CartContextProvider ({children}){
             )
             if (data.message == 'success'){
                 toast.success('added successfully');
-                setCount(cartCount + 1);
+                setCount(cartCount + 1); 
             }
             return data;
            
@@ -33,7 +33,7 @@ export function CartContextProvider ({children}){
             const token = localStorage.getItem("userToken");
             const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/cart`,
             {headers:{Authorization:`AmanGRAD__${token}`}})
-            setCount(data.count);
+            setCount(data.cart.products.length);
             return data;
         } catch (error){
             console.log(error)
