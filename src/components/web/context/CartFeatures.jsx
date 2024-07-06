@@ -12,6 +12,7 @@ export function CartContextProvider ({children}){
     
     const addToCart = async (ProductId)=>{
         try {
+            setLoading(true)
             const token = localStorage.getItem("userToken");
             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/cart`,
             {productId:ProductId},
@@ -25,6 +26,9 @@ export function CartContextProvider ({children}){
            
         } catch(error) {
             console.log(error)
+            setLoading(false)
+        }finally{
+            setLoading(false)
         }
     }
 
