@@ -5,6 +5,7 @@ import { registerSchema } from '../validation/validate.js';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import './Style.css'
+import { Link } from 'react-router-dom';
 
 export default function Register() {
     const initialValues= {
@@ -78,6 +79,7 @@ export default function Register() {
         <form onSubmit={formik.handleSubmit} encType='multipart/form-data' className='Form-Register'>
         {renderInputs}
         <button type='submit' className="button-23 mb-3" role="button" disabled={!formik.isValid}>Register</button>
+        <span style={{fontSize:'1rem'}}>You already have an account?<Link to='/login'> Login</Link></span>
         </form>
     </div>
 

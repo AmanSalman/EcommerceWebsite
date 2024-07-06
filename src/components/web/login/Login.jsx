@@ -76,6 +76,8 @@ export default function Login() {
         {renderInputs}
         <button type='submit' className="button-23 mb-3" role="button" disabled={!formik.isValid}>Log in</button>
         <Link to='/sendcode' className='forgetpass-link'>Forget Password?</Link>
+        <span style={{fontSize:'1rem'}}>You don't have an account?<Link to='/register'> Register</Link></span>
+        
         
         </form>
          {/* <div className="contentWrapper">

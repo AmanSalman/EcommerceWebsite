@@ -65,7 +65,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 65vh; 
   padding: 20px; 
   border-radius: 8px; 
   background-color: #fff; 
@@ -76,5 +76,8 @@
   .button-23 {
     padding: 2px 22px;
     font-size: 12px;
+  }
+  .Form-Register {
+    width: 100%;
   }
 }

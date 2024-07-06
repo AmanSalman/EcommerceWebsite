@@ -1,18 +1,24 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from "../Loader/Loader";
+import { UserContext } from "./User";
 
 export const CartContext = createContext(null);
 
 export function CartContextProvider ({children}){
 
+    const {user} = useContext(UserContext)
     let [cartCount,setCount] = useState(0);
     let [Loading, setLoading] = useState(false)
-    
+
     const addToCart = async (ProductId)=>{
         try {
             setLoading(true)
+            if(!user){
+                toast.error("Login to add to cart")
+                return;
+            }
             const token = localStorage.getItem("userToken");
             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/cart`,
             {productId:ProductId},
@@ -78,6 +84,7 @@ export function CartContextProvider ({children}){
             setLoading(false);
         }
     };
+
 
     if(Loading){
         return <Loader/>
