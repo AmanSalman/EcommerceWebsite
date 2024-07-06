@@ -29,7 +29,7 @@ export default function UserContact() {
 
     return (
         <div className="container mt-3">
-            <div className="card border-0 shadow-sm d-flex flex-row">
+            <div className="card border-0 shadow-sm d-flex flex-row flex-wrap">
                 <div className="card-body">
                     <h2 className="card-title fw-bold mb-4">User Information</h2>
                     <div className="row mb-3">

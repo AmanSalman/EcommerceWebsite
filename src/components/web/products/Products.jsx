@@ -1,6 +1,6 @@
 // // import axios from 'axios'
 // // import React, {useEffect, useState} from 'react'
-// // import  './products.css';
+// import  './products.css';
 // // import {Link} from 'react-router-dom';
 // // import Loader from '../Loader/Loader';
 
@@ -265,17 +265,24 @@ import { Link } from 'react-router-dom';
 import Loader from '../Loader/Loader';
 import styled from 'styled-components';
 import { CartContext } from '../context/CartFeatures';
+import  './products.css';
+
 
 // Styled components for card layout
 const CardContainer = styled.section`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const CardRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+display: flex;
+flex-wrap: wrap;
+@media (max-width:640px){
+
+flex-direction: column;}
 `;
 
 const CardColumn = styled.div`
@@ -452,7 +459,7 @@ export default function Products() {
     </ol>
   </nav>
       <h1 className="bordercolor">Our Products:</h1>
-      <CardRow className="row">
+      <CardRow>
         {products.map((product) => (
           <CardColumn key={product._id} className="col-md-4 col-sm-12 mb-3 position-relative">
             <Card>

@@ -7,23 +7,27 @@
 }
 
 .swiper-slide {
-    width: px !important;
+    width:100% !important;
 }
 .swiper-scrollbar-horizontal {
     display: none !important;
 }
 
+
+.swiper-pagination {
+    position: initial !important;
+}
+
+
 .swiper-button-prev:after , .swiper-button-next:after {
-    font-size: 1.6rem;
+    font-size: 1.2rem !important;
     color: black;
-  
 }
 
 .swiper-button-prev, .swiper-button-next {
-    padding: 1.5rem;
+    padding: 1.3rem;
     background: var(--color3);
     border-radius: 50%;
-  
 }
 
 

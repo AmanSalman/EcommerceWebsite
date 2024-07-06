@@ -48,6 +48,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .Profile-Links {
@@ -154,4 +155,14 @@
 
 .orders {
     font-family: "Dancing Script", cursive;
+}
+
+
+@media (max-width:640px){
+    .Profile-Links {
+        width: 100%;
+    }
+    .Profile-Links nav {
+        height: fit-content;
+    }
 }
