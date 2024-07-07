@@ -24,7 +24,6 @@ const WishlistContainer = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 1.5rem;
   p {
     margin: 0;
   }
@@ -192,6 +191,12 @@ const Wishlist = () => {
     <>
       <GlobalStyle />
       <WishlistContainer>
+      <nav aria-label="breadcrumb">
+                <ol className="breadcrumb container">
+                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page">Wishlist</li>
+                </ol>
+            </nav>
         <ProductsSection>
           <Title>
             <div>

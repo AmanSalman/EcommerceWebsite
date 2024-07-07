@@ -25,7 +25,7 @@ export default function CategoriesProducts() {
 	const {categoryName} = useParams();
 	console.log(categoryName)
 	const getProducts = async () => {
-		const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/products/category/${categoryId}`);
+		const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/category/products/${categoryId}`);
 		console.log(data.products)
 		return data.products;
 	}
@@ -62,12 +62,12 @@ export default function CategoriesProducts() {
 			<h1 className=' bordercolor mb-4 pb-1 ourProducts'>{categoryName}:</h1>
             <div className='row'>
                 {
-				data.length? data?.map((product) => 
+				data.length? (data?.map((product) => 
 
 				<div className="col-md-4 mb-3" key={product._id}>
 				   <div className="card h-100 w-100">
 					<div className=' d-flex justify-content-center'>
-						<img src={product.mainImage.secure_url} className='img-fluid w-50 mb-2 mt-3 product-img border-bottom'/>	
+						<img src={product?.MainImage?.secure_url} className='img-fluid w-50 mb-2 mt-3 product-img border-bottom'/>	
 					</div>
 				
 					 <div className="card-body  mb-2 p-2">
@@ -93,7 +93,7 @@ export default function CategoriesProducts() {
 			   </div>
 				</div>
 
-                ):<h2>No data found</h2>
+                )):<p className='text-center'>-No Products found-</p>
 			} 
             </div>
 				

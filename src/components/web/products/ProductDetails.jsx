@@ -333,14 +333,13 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { CartContext } from "../context/CartFeatures";
-import { Link } from "react-router-dom";
-import { CiHeart } from "react-icons/ci"; // Importing the CiHeart icon
-import "./details.css";
+import { CiHeart } from "react-icons/ci";
 import Loader from './../Loader/Loader';
-import photo from "./photos/user-3296.png";
-import { FaLock, FaShippingFast, FaUndoAlt } from "react-icons/fa";
+import photo from "./photos/5a54cfdb6320b05029b8fafb6fdb5f4e.jpg";
+import { FaLock, FaRegStar, FaShippingFast, FaStar, FaUndoAlt } from "react-icons/fa";
+import "./details.css";
 
 export default function ProductDetails() {
   const { ProductId } = useParams();
@@ -348,7 +347,8 @@ export default function ProductDetails() {
   const [mainImage, setMainImage] = useState(null);
   const [selectedColor, setSelectedColor] = useState("Red");
   const [selectedSize, setSelectedSize] = useState("M");
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 3;
 
   const getDetails = async () => {
     const { data } = await axios.get(
@@ -357,8 +357,8 @@ export default function ProductDetails() {
     const subImagesWithMain = [data.product.MainImage, ...data.product.subImage];
     setMainImage(data.product.MainImage.secure_url);
 
-    console.log({ ...data.product, subImage: subImagesWithMain })
-    return { ...data.product, subImage: subImagesWithMain };
+    console.log({ ...data.product, subImage: subImagesWithMain });
+    return { ...data.product, subImage: subImagesWithMain, reviews: data.product.Reviews };
   };
 
   const { data, isLoading } = useQuery("Product_details", getDetails);
@@ -367,219 +367,164 @@ export default function ProductDetails() {
     return <Loader />;
   }
 
+  const indexOfLastReview = currentPage * reviewsPerPage;
+  const indexOfFirstReview = indexOfLastReview - reviewsPerPage;
+  const currentReviews = data.reviews.slice(indexOfFirstReview, indexOfLastReview);
+  const totalPages = Math.ceil(data.reviews.length / reviewsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <>
+      <div className="container mt-5">
+        <nav aria-label="breadcrumb">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to="/products" className="main-color text-decoration-none">
+                Products
+              </Link>
+            </li>
+            <li className="breadcrumb-item main-color">
+              Products Details
+            </li>
+            <li className="breadcrumb-item main-color active">
+              {data.name}
+            </li>
+          </ol>
+        </nav>
 
-    {/* <div className="container mt-5">
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/products" className="main-color Link-text-deco">
-              Products
-            </Link>
-          </li>
-          <li className="breadcrumb-item main-color">
-            Products Details
-          </li>
-          <li className="breadcrumb-item main-color active">
-            {data.name}
-          </li>
-        </ol>
-      </nav>
-
-      <div className="row mt-5 flex-wrap">
-        <div className="col-md-6">
-          <div className="d-flex flex-wrap flex-column justify-content-center align-items-center">
-          <img
-              src={mainImage}
-              className="w-50 img-fluid mb-3"
-              alt="Product Image"
-            />
-            <div className="d-flex justify-content-center">
-            {data.subImage.map((image, index) => (
+        <div className="grid-container mt-5">
+          <div className="grid-item">
+            <div className="image-container">
               <img
-                key={index}
-                src={image.secure_url}
-                className={`w-25 me-2 img-fluid ${mainImage === image.secure_url ? "active border border-black p-2" : ""}`}
-                alt={`Sub Image ${index}`}
-                onClick={() => setMainImage(image.secure_url)}
-                style={{ cursor: "pointer" }}
+                src={mainImage}
+                className="main-image mb-3"
+                alt="Product Image"
               />
-            ))}
-            </div>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="p-4">
-            <h2 className="product-title">{data.name}</h2>
-            <p className="p-2">{data.description}</p>
-
-            <div className="price-info">
-              <p className="final-price">₪{data.FinalPrice}</p>
-              <p className="old-price"><del>₪{data.price}</del></p>
-              <p className="discount"> - {data.discount}% off</p>
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label">Color:</label>
-              <div className="color-options">
-                {["Red", "Blue", "Green"].map((color) => (
-                  <div
-                    key={color}
-                    className={`color-ball ${color.toLowerCase()} ${selectedColor === color ? "active" : ""}`}
-                    onClick={() => setSelectedColor(color)}
-                  ></div>
+              <div className="sub-image-container">
+                {data.subImage.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image.secure_url}
+                    className={`sub-image ${mainImage === image.secure_url ? "active border border-black p-2" : ""}`}
+                    alt={`Sub Image ${index}`}
+                    onClick={() => setMainImage(image.secure_url)}
+                    style={{ cursor: "pointer" }}
+                  />
                 ))}
               </div>
             </div>
+          </div>
+          <div className="grid-item">
+            <div className="details">
+              <h2 className="product-title">{data.name}</h2>
+              <p className="description">{data.description}</p>
 
-            <div className="mb-3">
-              <label className="form-label">Size:</label>
-              <div className="size-options">
-                {["S", "M", "L"].map((size) => (
-                  <div
-                    key={size}
-                    className={`size-ball ${selectedSize === size ? "active" : ""}`}
-                    onClick={() => setSelectedSize(size)}
-                  >
-                    {size}
-                  </div>
-                ))}
+              <div className="price-info">
+                <p className="final-price">₪{data.FinalPrice}</p>
+                <p className="old-price"><del>₪{data.price}</del></p>
+                <p className="discount"> - {data.discount}% off</p>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Color:</label>
+                <div className="color-options">
+                  {["Red", "Blue", "Green"].map((color) => (
+                    <div
+                      key={color}
+                      className={`color-ball ${color.toLowerCase()} ${selectedColor === color ? "active" : ""}`}
+                      onClick={() => setSelectedColor(color)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">Size:</label>
+                <div className="size-options">
+                  {["S", "M", "L"].map((size) => (
+                    <div
+                      key={size}
+                      className={`size-ball ${selectedSize === size ? "active" : ""}`}
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="button-container">
+                <button
+                  className="button-23 text-decoration-none"
+                  onClick={() => addToCart(data._id)}
+                >
+                  Add to Cart
+                </button>
+                <button className="">
+                  <CiHeart
+                    size={40}
+                    className="wishlist-icon"
+                    onClick={() => addToWishlist(data._id)}
+                  />
+                </button>
+                <Link to={`/Review/${data._id}`} className="text-decoration-none button-23">Create Review</Link>
+              </div>
+
+              <div className="reviews-section mt-5">
+                <h3 className="reviews-title">Reviews</h3>
+                {data.reviews.length > 0 ? (
+                  <>
+                    {currentReviews.map((review, index) => (
+                      <div key={index} className="review">
+                        <img src={photo} alt="User" className="review-user-photo" />
+                        <div className="review-content">
+                          <h4 className="review-user">{review.user.username}</h4>
+                          <p className="review-text">{review.comment}</p>
+                          <p className="review-rating">
+                            {Array.from({ length: 5 }, (_, i) =>
+                              i < review.rating ? <FaStar key={i} /> : <FaRegStar key={i} />
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="pagination">
+                      <button
+                        onClick={handlePreviousPage}
+                        disabled={currentPage === 1}
+                        className="pagination-button"
+                      >
+                        Previous
+                      </button>
+                      <span>Page {currentPage} of {totalPages}</span>
+                      <button
+                        onClick={handleNextPage}
+                        disabled={currentPage === totalPages}
+                        className="pagination-button"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <p className="no-reviews">No reviews yet.</p>
+                )}
               </div>
             </div>
-
-            <div className="d-flex gap-3 justify-content-between align-items-center">
-              <button
-                className="button-23 text-decoration-none"
-                onClick={() => addToCart(data._id)}
-              >
-                Add to Cart
-              </button>
-              <CiHeart
-                size={40}
-                className="wishlist-icon"
-                onClick={() => addToWishlist(data._id)}
-              />
-            </div>
-            <div className="polices mt-3">
-            <div className="d-flex align-items-center flex-column">
-              <FaShippingFast size={20} color="#ad8c74"  className="me-2" />
-              <span>Free Shipping</span>
           </div>
-            <div className="d-flex align-items-center flex-column">
-              <FaUndoAlt size={20} color="#ad8c74"  className="me-2" />
-              <span>Return Policy</span>
-          </div>
-            <div className="d-flex align-items-center flex-column">
-              <FaLock size={20} color="#ad8c74" className="me-2" />
-              <span>Shopping Security</span>
-          </div>
-        </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-
-<div className="container mt-5">
-  <nav aria-label="breadcrumb">
-    <ol className="breadcrumb">
-      <li className="breadcrumb-item">
-        <Link to="/products" className="main-color text-decoration-none">
-          Products
-        </Link>
-      </li>
-      <li className="breadcrumb-item main-color">
-        Products Details
-      </li>
-      <li className="breadcrumb-item main-color active">
-        {data.name}
-      </li>
-    </ol>
-  </nav>
-
-  <div className="grid-container mt-5">
-    <div className="grid-item">
-      <div className="image-container">
-        <img
-          src={mainImage}
-          className="main-image mb-3"
-          alt="Product Image"
-        />
-        <div className="sub-image-container">
-          {data.subImage.map((image, index) => (
-            <img
-              key={index}
-              src={image.secure_url}
-              className={`sub-image ${mainImage === image.secure_url ? "active border border-black p-2" : ""}`}
-              alt={`Sub Image ${index}`}
-              onClick={() => setMainImage(image.secure_url)}
-              style={{ cursor: "pointer" }}
-            />
-          ))}
         </div>
       </div>
-    </div>
-    <div className="grid-item">
-      <div className="details">
-        <h2 className="product-title">{data.name}</h2>
-        <p className="description">{data.description}</p>
-
-        <div className="price-info">
-          <p className="final-price">₪{data.FinalPrice}</p>
-          <p className="old-price"><del>₪{data.price}</del></p>
-          <p className="discount"> - {data.discount}% off</p>
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Color:</label>
-          <div className="color-options">
-            {["Red", "Blue", "Green"].map((color) => (
-              <div
-                key={color}
-                className={`color-ball ${color.toLowerCase()} ${selectedColor === color ? "active" : ""}`}
-                onClick={() => setSelectedColor(color)}
-              ></div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Size:</label>
-          <div className="size-options">
-            {["S", "M", "L"].map((size) => (
-              <div
-                key={size}
-                className={`size-ball ${selectedSize === size ? "active" : ""}`}
-                onClick={() => setSelectedSize(size)}
-              >
-                {size}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="button-container">
-          <button
-            className="button-23 text-decoration-none"
-            onClick={() => addToCart(data._id)}
-          >
-            Add to Cart
-          </button>
-          <CiHeart
-            size={40}
-            className="wishlist-icon"
-            onClick={() => addToWishlist(data._id)}
-          />
-        </div>
-       
-      </div>
-    </div>
-  </div>
-</div>
-
-
     </>
-   
   );
 }

@@ -273,7 +273,6 @@ const CartContainer = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 1.5rem;
   p {
     margin: 0;
   }
@@ -481,7 +480,7 @@ const MakeOrderButton = styled(Link)`
   font-size: 1.2rem;
   transition: background-color 0.3s ease-in-out;
   width: fit-content;
-  margin: 0 auto;
+  margin: 1rem auto;
   text-align: center;
   &:hover {
     background-color: var(--color3);
@@ -569,7 +568,14 @@ const Cart = () => {
   return (
     <>
       <GlobalStyle />
+      
       <CartContainer>
+      <nav aria-label="breadcrumb">
+                <ol className="breadcrumb container">
+                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page">Cart</li>
+                </ol>
+            </nav>
         {/* Left side: Products */}
         <ProductsSection>
           <Title>
@@ -618,16 +624,14 @@ const Cart = () => {
                     <button
                       onClick={() =>
                         handleUpdateQuantity(product.productId, 1, "-")
-                      }
-                    >
+                      }>
                       -
                     </button>
                     <span>{product.quantity}</span>
                     <button
                       onClick={() =>
                         handleUpdateQuantity(product.productId, 1, "+")
-                      }
-                    >
+                      }>
                       +
                     </button>
                   </div>
@@ -643,10 +647,10 @@ const Cart = () => {
           )}
         </ProductsSection>
 
-        {/* Right side: Summary and Coupon */}
-        <SummarySection>
+        {productsData.length !== 0 && (<SummarySection>
           <MakeOrderButton to="/CreateOrder">Make Order</MakeOrderButton>
-        </SummarySection>
+        </SummarySection>)}
+        
       </CartContainer>
     </>
   );

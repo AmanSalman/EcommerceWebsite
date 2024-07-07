@@ -6,4 +6,16 @@
   width:90%;
 }
 
+.order-finish .w-50-custom {
+  width: 66% !important;
+}
 
+
+
+
+@media (max-width: 640px){
+  .order-finish .breadcrumb {
+    width: 90%;
+    justify-content: center !important;
+  }
+}

@@ -8,6 +8,7 @@ import styled from 'styled-components'; // Import styled from styled-components
 import './order.css';
 import '../register/Style.css';
 import Loader from '../Loader/Loader';
+import { Link } from 'react-router-dom';
 
 // Styled component for SummarySection
 const SummarySection = styled.div`
@@ -20,7 +21,6 @@ const SummarySection = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-  margin-top:1.5rem;
   @media (max-width: 640px) {
   width: 85%;
 }
@@ -113,6 +113,17 @@ export default function CreateOrder() {
   }
 
   return (
+    <>
+    <div className='order-finish container'>
+
+    <nav aria-label="breadcrumb">
+                <ol className="breadcrumb container w-50-custom mt-5">
+                    <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page"><Link to="/cart">Cart</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page">Finish Order</li>
+                </ol>
+            </nav>
+    </div>
       <SummarySection> 
     <div className="d-flex order-div justify-content-center align-items-center">
       <div className="Creat-Order">
@@ -126,5 +137,6 @@ export default function CreateOrder() {
       </div>
     </div>
       </SummarySection>
+    </>
   );
 }

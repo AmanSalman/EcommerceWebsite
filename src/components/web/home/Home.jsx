@@ -45,6 +45,11 @@ import './home.css'
 function Home() {
   return (
     <>
+    <nav aria-label="breadcrumb">
+                <ol className="breadcrumb w-50-custom container">
+                    <li className="breadcrumb-item"> Home /</li>
+                </ol>
+            </nav>
     <Slider/>
     <div className="container m-home">
     <h1 className=' bordercolor ourProducts fw-bold'>Our Special Products:</h1>

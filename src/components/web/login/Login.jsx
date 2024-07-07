@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useFormik } from 'formik';
 import Input from '../../pages/Input';
 import { LoginSchema, registerSchema } from '../validation/validate.js';
@@ -8,8 +8,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/User.jsx';
 import Loginimg from '../../../assets/NewUp/Login.jpg'
 import './Login.css'
+import Loader from '../Loader/Loader.jsx';
 
 export default function Login() {
+    const [loading, setisloading] = useState(false)
     const initialValues= {
         email:'',
         password:'',
@@ -21,14 +23,24 @@ export default function Login() {
         navigate(-1);
     }
     const onSubmit = async (user) => {
-         const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,user);
-         console.log(data.message)
-         if (data.message == 'success'){
-            localStorage.setItem("userToken", data.token);
-            setUser(data.token)
-            toast.success('Login successfully');
+        try {
+            setisloading(true)
+             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`,user);
+             console.log(data.message)
+             if (data.message == 'success'){
+                localStorage.setItem("userToken", data.token);
+                setUser(data.token)
+                toast.success('Login successfully');
                 navigate('/');
-         }
+             }
+             setisloading(false);
+            
+        } catch (error) {
+            toast.error('Error while logging in, try again later')
+            setisloading(false);
+        } finally {
+            setisloading(false);
+        }
 
     }
     const formik = useFormik ({
@@ -67,6 +79,10 @@ export default function Login() {
      onBlur={formik.handleBlur} 
      touched={formik.touched}/>
     )
+
+    if(loading){
+        return <Loader/>
+    }
     
   return (
     

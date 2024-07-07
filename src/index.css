@@ -29,3 +29,11 @@ p {
   font-family: "Dancing Script", cursive;
   margin-bottom: 1.4rem;
 }
+
+
+@media (max-width: 640px) {
+  
+  .w-50-custom {
+    width: 85% !important;
+  }
+}

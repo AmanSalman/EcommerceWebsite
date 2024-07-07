@@ -1,4 +1,4 @@
-
+// CSS
 .breadcrumb {
   background: none;
 }
@@ -13,7 +13,6 @@
   padding: 0.5rem;
   margin-bottom: 1rem;
 }
-
 
 .button-container .button-23 {
   transition: all 0.5s !important;
@@ -162,6 +161,10 @@
   transition: all 0.5s;
 }
 
+button {
+  border: none;
+  background: transparent;
+}
 .wishlist-icon:hover {
   color: var(--color2);
   border-color: var(--color2);
@@ -170,14 +173,124 @@
 .policies {
   background-color: #ebedf0;
   border-radius: 15px;
+  padding: 10px;
   display: flex;
-  justify-content: center;
-  gap: 2rem;
-  padding: 15px;
+  justify-content: space-evenly;
+  gap: 5px;
 }
 
-.policy-item {
+.policy-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.policy-text {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.policy-icon {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  color: var(--color1);
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+.reviews-section {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.reviews-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.review {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.review-user-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 20px;
+  border:solid black 1px;
+}
+
+.review-content {
+  flex: 1;
+}
+
+.review-user {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.review-text {
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.review-rating {
+  font-size: 1rem;
+  color: #f39c12; /* Gold color for the stars */
+  display: flex;
+  align-items: center;
+}
+
+.review-rating .react-icons {
+  margin-right: 2px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-button {
+  background-color: var(--color4);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 0 3px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.pagination-button:disabled {
+  background-color: var(--color1);
+  color: var(--color4);
+  cursor: not-allowed;
+}
+
+.pagination-button:not(:disabled):hover {
+  background-color: var(--color1);
+}
+
+.pagination span {
+  margin: 0 8px;
+  font-size: 14px;
+  color: #333333;
+}
+
+
+@media (max-width: 640px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+}
 }
