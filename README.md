@@ -27,7 +27,7 @@ This is an eCommerce web application built with React. It allows users to browse
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/AmanSalman/EcommerceWebsite.git
+   git clone https://github.com/AmanSalman/Ecommerce-ReactJs-Front.git
    cd EcommerceWebsite
 
 2. Install dependencies:
