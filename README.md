@@ -16,7 +16,8 @@ This is an eCommerce web application built with React. It allows users to browse
 - **React Router**: For routing and navigation
 - **Context API**: For state management
 - **Axios**: For making HTTP requests
-- **CSS**: For styling the application (or Bootstrap/Tailwind CSS if applicable)
+- **CSS**: For styling the application
+- **Bootstrap**
 
 ## Getting Started
 
